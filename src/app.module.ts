@@ -1,6 +1,8 @@
 import { MikroOrmModule } from '@mikro-orm/nestjs';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { join } from 'path';
+import { CliModule } from './cli/cli.module';
 import { CollectionModule } from './collection/collection.module';
 import config from './config';
 
@@ -12,6 +14,7 @@ import config from './config';
     MikroOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (config: ConfigService) => ({
+        debug: config.get('app.debug'),
         type: config.get('database.type'),
         dbName: config.get('database.name'),
         host: config.get('database.host'),
@@ -19,11 +22,20 @@ import config from './config';
         user: config.get('database.username'),
         password: config.get('database.password'),
         entities: ['dist/**/*.entity.js'],
-        entitiesTs: ['dist/**/*.entity.ts'],
+        entitiesTs: ['src/**/*.entity.ts'],
+        migrations: {
+          tableName: 'migrations',
+          path: join(__dirname, '_database/migrations'),
+          pattern: /^[\w-]+\d+\.ts$/,
+          transactional: true,
+          allOrNothing: true,
+          emit: 'ts',
+        },
       }),
       inject: [ConfigService],
     }),
     CollectionModule,
+    CliModule,
   ],
 })
 export class AppModule {}

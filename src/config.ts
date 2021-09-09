@@ -1,6 +1,7 @@
 export default () => ({
   app: {
     port: parseInt(process.env.APP_PORT, 10) || 3000,
+    debug: process.env.APP_DEBUG === 'true',
   },
   database: {
     type: process.env.DB_TYPE || 'mysql',
