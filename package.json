@@ -2,7 +2,7 @@
   "name": "nestjs-template",
   "private": true,
   "version": "0.0.0",
-  "description": "Personal nestjs template.",
+  "description": "NestJS + MikroORM + nestjs-console",
   "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",
