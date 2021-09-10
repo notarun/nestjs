@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title><%= it.title %></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/app.css">
+  <script src="//unpkg.com/alpinejs" defer></script>
+</head>
+<body>
+  <div class="container my-2" style="border-radius: 0.4rem;">
+    <header>
+      <h1><%= it.title %></h1>
+      <span><%= it.description %></span>
+    </header>
+    <hr>
+    <main
+      class="my-2"
+      x-data="{collections: []}"
+      x-init="collections = (await (await fetch('/collections')).json())">
+      <div class="text-center">
+        <template x-if="collections.length === 0">
+          <span class="loading" style="font-size: 2em;"></span>
+        </template>
+      </div>
+      <ul class="list-style-none p-0">
+        <template x-for="collection in collections" :key="collection.id">
+          <li>
+            <h3 x-text="collection.title"></h3>
+            <p x-text="collection.description"></p>
+          </li>
+        </template>
+      </ul>
+    </main>
+  </div>
+</body>
+</html>

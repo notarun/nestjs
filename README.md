@@ -3,7 +3,7 @@
 </p>
 
 ## Description
-Personal NestJS template with NestJS + MikroORM + nestjs-console.
+Personal NestJS template with NestJS + MikroORM + nestjs-console + eta.
 
 > Only MySQL is supported
 
