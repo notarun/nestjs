@@ -2,8 +2,8 @@ import { MikroOrmModule } from '@mikro-orm/nestjs';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { join } from 'path';
-import { CliModule } from './cli/cli.module';
-import { CollectionModule } from './collection/collection.module';
+import { CliModule } from './modules/cli/cli.module';
+import { CollectionModule } from './modules/collection/collection.module';
 import config from './config';
 
 @Module({
@@ -25,7 +25,7 @@ import config from './config';
         entitiesTs: ['src/**/*.entity.ts'],
         migrations: {
           tableName: 'migrations',
-          path: join(__dirname, '_database/migrations'),
+          path: join(__dirname, 'database/migrations'),
           pattern: /^[\w-]+\d+\.ts$/,
           transactional: true,
           allOrNothing: true,

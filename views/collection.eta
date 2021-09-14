@@ -18,7 +18,7 @@
     <main
       class="my-2"
       x-data="{collections: []}"
-      x-init="collections = (await (await fetch('/collections')).json())">
+      x-init="collections = (await (await fetch('/collections.json')).json()).data">
       <div class="text-center">
         <template x-if="collections.length === 0">
           <span class="loading" style="font-size: 2em;"></span>
