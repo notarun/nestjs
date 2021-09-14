@@ -11,9 +11,9 @@ Personal NestJS template with NestJS + MikroORM + nestjs-console + eta.
 
 ```bash
 npm install
-
-# configure .env file
 cp .env.example .env
+docker-compose up
+docker-compose run app npm run console migration up
 ```
 
 ## Running the app
